@@ -1,6 +1,9 @@
 package org.zerock.mapper.ex02;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.domain.ex01.CustomerDto;
 import org.zerock.domain.ex01.EmployeeDto;
@@ -31,8 +34,62 @@ public interface Ex02Mapper {
 	int insertCustomer(CustomerDto customer);
 
 	@Insert("INSERT INTO Employees"
-			+ " (LastName, FirstName, Photo, Notes) "
-			+ "VALUES (#{lastName}, #{firstName}, #{photo}, #{notes} ) ")
+			+ " (LastName, FirstName, Photo, Notes, BirthDate) "
+			+ "VALUES (#{lastName}, #{firstName}, #{photo}, #{notes}, #{birthDate} ) ")
 	int insertEmployee(EmployeeDto employee);
 
+	@Select("SELECT EmployeeID id, FirstName, LastName, Photo, Notes, BirthDate "
+			+ "FROM Employees ORDER BY EmployeeID ")
+	List<EmployeeDto> listEmployee();
+	
+	@Select("SELECT CustomerID id, CustomerName, ContactName, City, Country, Address, PostalCode "
+			+ "FROM Customers ORDER BY CustomerID ")
+	List<CustomerDto> listCustomer();
+
+	@Select("SELECT CustomerID id, "
+			+ "CustomerName, "
+			+ "ContactName, "
+			+ "Address, "
+			+ "City, "
+			+ "PostalCode, "
+			+ "Country "
+			+ "FROM Customers "
+			+ "LIMIT #{from }, #{row }")
+	List<CustomerDto> listCustomerPage(@Param("from") int from, @Param("row") int row);
+	
+	@Select("SELECT Count(CustomerID) FROM Customers ")
+	int countCustomers();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

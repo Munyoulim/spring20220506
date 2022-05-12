@@ -1,14 +1,18 @@
 package org.zerock.controller.ex09;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.ex01.CustomerDto;
 import org.zerock.domain.ex01.EmployeeDto;
+import org.zerock.domain.ex01.PageInfoDto;
 import org.zerock.service.ex02.Ex04Service;
 
 @Controller
@@ -94,6 +98,8 @@ public class Ex14Controller {
 		return "redirect:/ex14/sub05";
 	}
 	
+	
+	/* 직원 등록 */
 	@GetMapping("sub06")
 	public void method06() {
 		// form 있는 jsp로 forward
@@ -114,7 +120,76 @@ public class Ex14Controller {
 		
 		return "redirect:/ex14/sub06";
 	}
+	
+	@GetMapping("sub07")
+	public void method07(Model model) {
+		
+		List<EmployeeDto> list = service.listEmployee();
+		
+		model.addAttribute("employees", list);
+	}
+	
+	// 고객 목록 조회 코드 작성
+	
+	@GetMapping("sub08")
+	public void method08(Model model) {
+		
+		List<CustomerDto> list = service.listCustomer();
+		
+		model.addAttribute("customers", list);
+		
+	}
+	
+	// /ex14/sub09?page=3
+	@GetMapping("sub09")
+	public void method09(@RequestParam(name = "page", defaultValue = "1")int page, Model model) {
+		
+		int rowPerPage = 5;
+		
+		List<CustomerDto> list = service.listCustomerPage(page, rowPerPage);
+		int totalRecords = service.countCustomers();
+		
+		int end = (totalRecords - 1) / rowPerPage + 1;
+		
+		PageInfoDto pageInfo = new PageInfoDto();
+		pageInfo.setCurrent(page);
+		pageInfo.setEnd(end);
+		
+		model.addAttribute("customers", list);
+		model.addAttribute("pageInfo", pageInfo);
+		
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

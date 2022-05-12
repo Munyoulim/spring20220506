@@ -11,19 +11,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<h1>${message }</h1>
-
-	<h1>새 직원 입력</h1>
-	<form action="${pageContext.request.contextPath }/ex14/sub06" method="post">
-		성 : <input type="text" name="firstName" value="Mun"/> <br />
-		이름 : <input type="text" name="LastName" value="YouLim"/> <br />
-		Birth Date : <input type="date" name="birthDate" value="1995-12-07"/> <br />
-		사진 : <input type="text" name="photo" value="Nothing.pic"/> <br />
-		노트 : <input type="text" name="notes" value="Best Developer"/> <br />
-		<button>등록</button>
+	<h1>직원 목록</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>BIRTH</th>
+				<th>PHOTO</th>
+				<th>NOTES</th>
+			</tr>
+		</thead>
 		
-	</form>
-	
+		<tbody>
+			<c:forEach items="${employees }" var="emp">
+				<tr>
+					<th>${emp.id }</th>
+					<th>${emp.firstName }</th>
+					<th>${emp.lastName }</th>
+					<th>${emp.birthDate }</th>
+					<th>${emp.photo }</th>
+					<th>${emp.notes }</th>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
