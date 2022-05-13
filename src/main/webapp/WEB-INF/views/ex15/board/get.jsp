@@ -14,9 +14,8 @@
 <body>
 	<h1>${board.id }번 게시물</h1>
 	
-	<c:url value="/ex15/board/modify" var="modifyLink"></c:url>
 	
-	<form action="${modifyLink }" method="post">
+	<form action="${appRoot }/ex15/board/modify" method="post">
 	<input type="hidden" name="id" value="${board.id }" />
 	
 	제목 : <input type="text" value="${board.title }" name="title" /> <br />
@@ -56,9 +55,9 @@
 				
 				<c:url value="/ex16/reply/modify" var="replyModifyLink" />
 				<form action="${replyModifyLink }" method="post">
-					<input type="hidden" value="${reply.id }" name="id"/>
+					<input type="hidden" value="${reply.id }" name="id" />
 					<input type="hidden" name="boardId" value="${board.id }" />
-					<input type="text" value="${reply.content }" name="content"/>
+					<input type="text" value="${reply.content }" name="content" />
 					<button>수정</button>
 				</form>
 				
