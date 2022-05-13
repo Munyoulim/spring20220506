@@ -31,6 +31,11 @@
   	WHERE id = #{id}
   </delete>
   
+  <insert id ="insertBoard" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+  	INSERT INTO Board (title, body, inserted)
+  	VALUES (#{title}, #{body}, #{inserted})
+  </insert>
+  
 </mapper>
 
 
