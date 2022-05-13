@@ -28,5 +28,42 @@
 	
 	</form>
 	
+	<c:url value="/ex15/board/remove" var="removeLink" />
+	<form action="${removeLink }" method="post">
+		<input type="hidden" name="id" value="${board.id }"/>
+		<button>삭제</button>
+	</form>
+	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
