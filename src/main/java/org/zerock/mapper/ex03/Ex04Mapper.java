@@ -11,5 +11,7 @@ public interface Ex04Mapper {
 	List<ReplyDto> selectReplyByBoardId(int boardId);
 
 	int deleteReplyById(int id);
+
+	int updateReply(ReplyDto reply);
 	
 }
